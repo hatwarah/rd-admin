@@ -30,7 +30,7 @@ const VideosPage: React.FC = () => {
     }
   })
 
-  const toggleFeat uredMutation = useMutation(videosAPI.toggleFeatured, {
+  const toggleFeaturedMutation = useMutation(videosAPI.toggleFeatured, {
     onSuccess: () => {
       queryClient.invalidateQueries('videos')
       toast.success('Featured status updated')

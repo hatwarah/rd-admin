@@ -7,6 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
+        border: '#e2e8f0', // Example: slate-200 for borders
+        background: '#ffffff', // Example: white for background
+        foreground: '#1e293b', // Example: slate-800 for text
         primary: {
           50: '#eff6ff',
           100: '#dbeafe',
