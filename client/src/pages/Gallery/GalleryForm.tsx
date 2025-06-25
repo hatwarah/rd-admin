@@ -125,7 +125,28 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSuccess }) => {
     setFormData(prev => ({ ...prev, tags }))
   }
 
-  const categories = ['Residential', 'Commercial', 'Mixed-Use', 'Institutional', 'Miscellaneous']
+  const categories = [
+    "All",
+    "High Rise Residential",
+    "Low Rise Residential",
+    "Villa Township",
+    "Landscape + Resort",
+    "Interior Units",
+    "House Models",
+    "Commercial Models",
+    "Institutional Models",
+    "Villa Unit Models",
+    "Industrial / Factory Models",
+    "Healthcare Hospital Models",
+    "Water supply Models",
+    "Residential Township",
+    "Industrial Township",
+    "Monochromatic Models",
+    "Art Models",
+    "Sectional Models",
+    "Monuments",
+    "Miscellaneous",
+  ];
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">

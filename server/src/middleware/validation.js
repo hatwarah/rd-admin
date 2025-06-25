@@ -22,7 +22,30 @@ const galleryValidation = [
   body('category')
     .notEmpty()
     .withMessage('Category is required')
-    .isIn(['Residential', 'Commercial', 'Mixed-Use', 'Institutional', 'Miscellaneous'])
+    // .isIn(
+    //   [
+    //     "All",
+    //     "High Rise Residential",
+    //     "Low Rise Residential",
+    //     "Villa Township",
+    //     "Landscape + Resort",
+    //     "Interior Units",
+    //     "House Models",
+    //     "Commercial Models",
+    //     "Institutional Models",
+    //     "Villa Unit Models",
+    //     "Industrial / Factory Models",
+    //     "Healthcare Hospital Models",
+    //     "Water supply Models",
+    //     "Residential Township",
+    //     "Industrial Township",
+    //     "Monochromatic Models",
+    //     "Art Models",
+    //     "Sectional Models",
+    //     "Monuments",
+    //     "Miscellaneous",
+    //   ]
+    // )
     .withMessage('Invalid category'),
   body('description')
     .trim()
@@ -43,7 +66,30 @@ const videoValidation = [
   body('category')
     .notEmpty()
     .withMessage('Category is required')
-    .isIn(['Residential', 'Commercial', 'Mixed-Use', 'Institutional', 'Walkthrough', 'Animation'])
+    .isIn(
+      [
+        "All",
+        "High Rise Residential",
+        "Low Rise Residential",
+        "Villa Township",
+        "Landscape + Resort",
+        "Interior Units",
+        "House Models",
+        "Commercial Models",
+        "Institutional Models",
+        "Villa Unit Models",
+        "Industrial / Factory Models",
+        "Healthcare Hospital Models",
+        "Water supply Models",
+        "Residential Township",
+        "Industrial Township",
+        "Monochromatic Models",
+        "Art Models",
+        "Sectional Models",
+        "Monuments",
+        "Miscellaneous",
+      ]
+    )
     .withMessage('Invalid category'),
   body('description')
     .trim()
