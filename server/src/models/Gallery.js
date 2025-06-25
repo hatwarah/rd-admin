@@ -37,12 +37,6 @@ const gallerySchema = new mongoose.Schema({
       default: 0
     }
   }],
-  slug: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    trim: true
-  },
   status: {
     type: String,
     enum: ['draft', 'published', 'archived'],
@@ -56,18 +50,7 @@ const gallerySchema = new mongoose.Schema({
     type: String,
     trim: true
   }],
-  location: {
-    type: String,
-    trim: true
-  },
   client: {
-    type: String,
-    trim: true
-  },
-  completionDate: {
-    type: Date
-  },
-  projectSize: {
     type: String,
     trim: true
   },
@@ -88,21 +71,8 @@ const gallerySchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Create slug from title before saving
-gallerySchema.pre('save', function(next) {
-  if (this.isModified('title') && !this.slug) {
-    this.slug = this.title
-      .toLowerCase()
-      .replace(/[^a-zA-Z0-9]/g, '-')
-      .replace(/-+/g, '-')
-      .replace(/^-|-$/g, '');
-  }
-  next();
-});
-
 // Index for better query performance
 gallerySchema.index({ category: 1, status: 1 });
-gallerySchema.index({ slug: 1 });
 gallerySchema.index({ createdAt: -1 });
 
 module.exports = mongoose.model('Gallery', gallerySchema);

@@ -26,11 +26,11 @@ const getFolderPath = (type, category, projectName = null) => {
 
 // Upload function with automatic folder organization
 const uploadToCloudinary = async (file, options = {}) => {
+  const { type = 'misc', category = 'general', projectName = null, resourceType = 'image' } = options;
+
   try {
-    const { type, category, projectName, resourceType = 'image' } = options;
-    
     const folderPath = getFolderPath(type, category, projectName);
-    
+
     const uploadOptions = {
       folder: folderPath,
       resource_type: resourceType,
@@ -46,6 +46,20 @@ const uploadToCloudinary = async (file, options = {}) => {
       ];
     }
 
+    // Check if file is a buffer
+    if (Buffer.isBuffer(file)) {
+      uploadOptions.resource_type = 'auto';
+      const result = await new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(uploadOptions, (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        });
+        uploadStream.end(file);
+      });
+      return result;
+    }
+
+    // Handle file path string
     const result = await cloudinary.uploader.upload(file, uploadOptions);
     return result;
   } catch (error) {

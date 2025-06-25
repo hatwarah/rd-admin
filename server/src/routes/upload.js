@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const { auth } = require('../middleware/auth');
 const { uploadToCloudinary, batchUploadToCloudinary } = require('../config/cloudinary');
+const Gallery = require('../models/Gallery');
 
 const router = express.Router();
 
@@ -42,16 +43,18 @@ router.post('/images', auth, upload.array('images', 10), async (req, res) => {
       return res.status(400).json({ message: 'No files uploaded' });
     }
 
-    const { type, category, projectName } = req.body;
+    const { type, category, projectName, description='' } = req.body;
 
     const uploadPromises = req.files.map(file => {
       return uploadToCloudinary(file.buffer, {
         type,
         category,
+        title: file.originalname,
         projectName,
         resourceType: 'image'
       });
     });
+    console.log(uploadPromises)
 
     const results = await Promise.all(uploadPromises);
 
@@ -61,9 +64,21 @@ router.post('/images', auth, upload.array('images', 10), async (req, res) => {
       width: result.width,
       height: result.height,
       format: result.format,
-      size: result.bytes
+      size: result.bytes,
+      order: 0
     }));
 
+    // Save to database
+    const galleryItem = new Gallery({
+      title: projectName || req.file.originalname.split('.')[0], // Use provided title or filename without extension
+      category: category || 'Miscellaneous',
+      description: description || 'Uploaded via blog',
+      images: uploadedImages,
+      createdBy: req.user._id
+    });
+
+    await galleryItem.save();
+    
     res.json({
       success: true,
       data: uploadedImages
@@ -88,6 +103,7 @@ router.post('/video', auth, upload.single('video'), async (req, res) => {
     const result = await uploadToCloudinary(req.file.buffer, {
       type: 'video',
       category,
+      title: req.file.originalname,
       resourceType: 'video'
     });
 
@@ -125,6 +141,7 @@ router.post('/thumbnail', auth, upload.single('thumbnail'), async (req, res) => 
     const result = await uploadToCloudinary(req.file.buffer, {
       type: 'video',
       category,
+      title: req.file.originalname,
       resourceType: 'image'
     });
 
@@ -156,11 +173,16 @@ router.post('/blog-image', auth, upload.single('image'), async (req, res) => {
       return res.status(400).json({ message: 'No image file uploaded' });
     }
 
+    const { title, category, description } = req.body;
+    
+    // Upload to Cloudinary
     const result = await uploadToCloudinary(req.file.buffer, {
       type: 'blog',
+      title: req.file.originalname,
       resourceType: 'image'
     });
 
+    // Prepare image data
     const uploadedImage = {
       url: result.secure_url,
       publicId: result.public_id,
@@ -170,9 +192,23 @@ router.post('/blog-image', auth, upload.single('image'), async (req, res) => {
       size: result.bytes
     };
 
+    // Save to database
+    const galleryItem = new Gallery({
+      title: title || req.file.originalname.split('.')[0], // Use provided title or filename without extension
+      category: category || 'Miscellaneous',
+      description: description || 'Uploaded via blog',
+      images: [uploadedImage]
+    });
+
+    await galleryItem.save();
+
     res.json({
       success: true,
-      data: uploadedImage
+      message: 'Image uploaded and saved successfully',
+      data: {
+        ...uploadedImage,
+        galleryId: galleryItem._id
+      }
     });
   } catch (error) {
     console.error('Blog image upload error:', error);
@@ -191,6 +227,7 @@ router.post('/author-image', auth, upload.single('authorImage'), async (req, res
 
     const result = await uploadToCloudinary(req.file.buffer, {
       type: 'blog-author',
+      title: req.file.originalname,
       resourceType: 'image'
     });
 
