@@ -194,22 +194,21 @@ router.post('/blog-image', auth, upload.single('image'), async (req, res) => {
       size: result.bytes
     };
 
-    // Save to database
-    const galleryItem = new Gallery({
-      title: title || req.file.originalname.split('.')[0], // Use provided title or filename without extension
-      category: category || 'Miscellaneous',
-      description: description || 'Uploaded via blog',
-      images: [uploadedImage]
-    });
+    // // Save to database
+    // const galleryItem = new Gallery({
+    //   title: title || req.file.originalname.split('.')[0], // Use provided title or filename without extension
+    //   category: category || 'Miscellaneous',
+    //   description: description || 'Uploaded via blog',
+    //   images: [uploadedImage]
+    // });
 
-    await galleryItem.save();
+    // await galleryItem.save();
 
     res.json({
       success: true,
       message: 'Image uploaded and saved successfully',
       data: {
         ...uploadedImage,
-        galleryId: galleryItem._id
       }
     });
   } catch (error) {

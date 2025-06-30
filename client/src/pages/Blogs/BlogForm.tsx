@@ -406,6 +406,12 @@ const BlogForm: React.FC<BlogFormProps> = ({ item, onSuccess }) => {
       <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
         <Button
           type="submit"
+          style={{
+            color: 'white',
+            backgroundColor: 'black',
+            borderColor: 'black',
+            cursor: 'pointer',
+          }}
           loading={createMutation.isLoading || updateMutation.isLoading || isUploadingFeatured || isUploadingAuthor}
           disabled={!featuredImage}
         >

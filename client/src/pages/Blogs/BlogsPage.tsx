@@ -55,7 +55,13 @@ const BlogsPage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900">Blog Management</h1>
           <p className="text-gray-600">Manage your blog posts</p>
         </div>
-        <Button onClick={() => setIsModalOpen(true)}>
+        <Button onClick={() => setIsModalOpen(true)}
+          style={{
+            color: 'white',
+            backgroundColor: 'black',
+            borderColor: 'black',
+            cursor: 'pointer',
+          }}>
           <Plus className="w-4 h-4 mr-2" />
           Add Blog Post
         </Button>
@@ -87,7 +93,7 @@ const BlogsPage: React.FC = () => {
       ) : (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
           <div className="divide-y divide-gray-200">
-            {data?.data?.blogs?.map((blog: any) => (
+            {data?.data?.data?.blogs?.map((blog: any) => (
               <div key={blog._id} className="p-6 hover:bg-gray-50 transition-colors duration-200">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
