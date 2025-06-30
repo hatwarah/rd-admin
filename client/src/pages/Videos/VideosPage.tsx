@@ -15,9 +15,26 @@ const VideosPage: React.FC = () => {
 
   const queryClient = useQueryClient()
 
-  const { data, isLoading } = useQuery(
+  interface ApiResponse {
+    data: {
+      videos: any[];
+      totalPages: number;
+      currentPage: number;
+      total: number;
+    };
+  }
+
+  const { data, isLoading } = useQuery<ApiResponse>(
     ['videos', selectedCategory],
-    () => videosAPI.getAll({ category: selectedCategory || undefined })
+    () => videosAPI.getAll({ category: selectedCategory || undefined }),
+    {
+      onSuccess: (data) => {
+        console.log('API Response:', data);
+      },
+      onError: (error) => {
+        console.error('Error fetching videos:', error);
+      }
+    }
   )
 
   const deleteMutation = useMutation(videosAPI.delete, {
@@ -100,7 +117,7 @@ const VideosPage: React.FC = () => {
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {data?.data?.videos?.map((video: any) => (
+          {data?.data?.data?.videos?.map((video: any) => (
             <div key={video._id} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow duration-200">
               <div className="aspect-video bg-gray-200 relative overflow-hidden group">
                 {video.thumbnail?.url ? (
@@ -126,7 +143,7 @@ const VideosPage: React.FC = () => {
                 )}
                 {video.duration && (
                   <div className="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white px-2 py-1 rounded text-xs">
-                    {video.duration}
+                    {parseFloat(video.duration).toFixed(2)}
                   </div>
                 )}
               </div>

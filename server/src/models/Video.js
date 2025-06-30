@@ -22,11 +22,9 @@ const videoSchema = new mongoose.Schema({
   thumbnail: {
     url: {
       type: String,
-      required: [true, 'Thumbnail URL is required']
     },
     publicId: {
       type: String,
-      required: true
     }
   },
   videoUrl: {
