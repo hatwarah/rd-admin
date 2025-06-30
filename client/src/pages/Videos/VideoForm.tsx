@@ -19,7 +19,6 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
     duration: '',
     location: '',
     client: '',
-    tags: [] as string[],
     featured: false,
     status: 'published',
     resolution: '1080p'
@@ -38,7 +37,6 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
         duration: item.duration || '',
         location: item.location || '',
         client: item.client || '',
-        tags: item.tags || [],
         featured: item.featured || false,
         status: item.status || 'published',
         resolution: item.resolution || '1080p'
@@ -227,22 +225,6 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Resolution
-          </label>
-          <select
-            name="resolution"
-            value={formData.resolution}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-          >
-            <option value="720p">720p</option>
-            <option value="1080p">1080p</option>
-            <option value="4K">4K</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
             Status
           </label>
           <select
@@ -256,63 +238,21 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
             <option value="archived">Archived</option>
           </select>
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Location
+        <div className="flex items-center">
+          <label className="flex items-center">
+            <input
+              type="checkbox"
+              name="featured"
+              checked={formData.featured}
+              onChange={handleChange}
+              className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+            />
+            <span className="ml-2 text-sm text-gray-700">Featured</span>
           </label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-            placeholder="Enter location"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Client
-          </label>
-          <input
-            type="text"
-            name="client"
-            value={formData.client}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-            placeholder="Enter client name"
-          />
         </div>
       </div>
 
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Tags (comma separated)
-        </label>
-        <input
-          type="text"
-          value={formData.tags.join(', ')}
-          onChange={handleTagsChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-          placeholder="Enter tags separated by commas"
-        />
-      </div>
 
-      <div className="flex items-center">
-        <label className="flex items-center">
-          <input
-            type="checkbox"
-            name="featured"
-            checked={formData.featured}
-            onChange={handleChange}
-            className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
-          />
-          <span className="ml-2 text-sm text-gray-700">Featured</span>
-        </label>
-      </div>
 
       {/* Thumbnail Upload */}
       <div>
@@ -377,6 +317,10 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
       <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
         <Button
           type="submit"
+          style={{
+            backgroundColor: "black",
+            color: 'white'
+          }}
           loading={createMutation.isLoading || updateMutation.isLoading || isUploadingThumbnail || isUploadingVideo}
           disabled={!thumbnail || !video}
         >

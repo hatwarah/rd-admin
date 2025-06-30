@@ -86,7 +86,10 @@ const VideosPage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900">Video Management</h1>
           <p className="text-gray-600">Manage your video content</p>
         </div>
-        <Button onClick={() => setIsModalOpen(true)}>
+        <Button onClick={() => setIsModalOpen(true)} style={{
+            backgroundColor: "black",
+            color: 'white'
+          }}>
           <Plus className="w-4 h-4 mr-2" />
           Add Video
         </Button>
