@@ -69,16 +69,16 @@ router.post('/images', auth, upload.array('images', 10), async (req, res) => {
       order: 0
     }));
 
-    // Save to database
-    const galleryItem = new Gallery({
-      title: projectName || req.file.originalname.split('.')[0], // Use provided title or filename without extension
-      category: category || 'Miscellaneous',
-      description: description || 'Uploaded via blog',
-      images: uploadedImages,
-      createdBy: req.user._id
-    });
+    // // Save to database
+    // const galleryItem = new Gallery({
+    //   title: projectName || req.file.originalname.split('.')[0], // Use provided title or filename without extension
+    //   category: category || 'Miscellaneous',
+    //   description: description || 'Uploaded via blog',
+    //   images: uploadedImages,
+    //   createdBy: req.user._id
+    // });
 
-    await galleryItem.save();
+    // await galleryItem.save();
     
     res.json({
       success: true,

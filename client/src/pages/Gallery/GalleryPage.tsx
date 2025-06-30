@@ -109,7 +109,13 @@ const GalleryPage: React.FC = () => {
           <h1 className="text-2xl font-bold text-gray-900">Gallery Management</h1>
           <p className="text-gray-600">Manage your gallery images and projects</p>
         </div>
-        <Button onClick={() => setIsModalOpen(true)}>
+        <Button onClick={() => setIsModalOpen(true)} 
+          style={{
+            color: 'white',
+            backgroundColor: 'black',
+            borderColor: 'black',
+            cursor: 'pointer',
+          }}>
           <Plus className="w-4 h-4 mr-2" />
           Add Gallery Item
         </Button>

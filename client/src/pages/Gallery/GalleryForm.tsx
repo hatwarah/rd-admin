@@ -16,8 +16,6 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSuccess }) => {
     title: '',
     category: 'Residential',
     description: '',
-    location: '',
-    client: '',
     tags: [] as string[],
     featured: false,
     status: 'published'
@@ -30,10 +28,8 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSuccess }) => {
     if (item) {
       setFormData({
         title: item.title || '',
-        category: item.category || 'Residential',
+        category: item.category || 'High Rise Residential',
         description: item.description || '',
-        location: item.location || '',
-        client: item.client || '',
         tags: item.tags || [],
         featured: item.featured || false,
         status: item.status || 'published'
@@ -201,49 +197,6 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSuccess }) => {
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Location
-          </label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-            placeholder="Enter location"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Client
-          </label>
-          <input
-            type="text"
-            name="client"
-            value={formData.client}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-            placeholder="Enter client name"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Tags (comma separated)
-        </label>
-        <input
-          type="text"
-          value={formData.tags.join(', ')}
-          onChange={handleTagsChange}
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
-          placeholder="Enter tags separated by commas"
-        />
-      </div>
-
       <div className="flex items-center space-x-6">
         <label className="flex items-center">
           <input
@@ -317,6 +270,11 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSuccess }) => {
       <div className="flex justify-end space-x-4 pt-6 border-t border-gray-200">
         <Button
           type="submit"
+          style={{
+            color: 'white',
+            backgroundColor: 'black',
+            borderColor: 'black',
+          }}  
           loading={createMutation.isLoading || updateMutation.isLoading || isUploading}
           disabled={uploadedImages.length === 0}
         >
