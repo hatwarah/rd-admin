@@ -75,11 +75,6 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!thumbnail) {
-      toast.error('Please upload a thumbnail')
-      return
-    }
-
     if (!video) {
       toast.error('Please upload a video')
       return
@@ -87,12 +82,14 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
 
     const submitData = {
       ...formData,
-      thumbnail: {
-        url: thumbnail.url,
-        publicId: thumbnail.publicId
-      },
-      videoUrl: video.url,
-      videoPublicId: video.publicId
+      ...(thumbnail ? {
+        thumbnail: {
+          url: thumbnail.url || '',
+          publicId: thumbnail.publicId || ''
+        }
+      } : {}),
+      videoUrl: video?.url || '',
+      videoPublicId: video?.publicId || ''
     }
 
     if (item) {
@@ -322,7 +319,7 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
             color: 'white'
           }}
           loading={createMutation.isLoading || updateMutation.isLoading || isUploadingThumbnail || isUploadingVideo}
-          disabled={!thumbnail || !video}
+          disabled={!video}
         >
           {item ? 'Update Video' : 'Create Video'}
         </Button>

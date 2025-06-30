@@ -118,19 +118,6 @@ router.post('/video', auth, upload.single('video'), async (req, res) => {
       format: result.format,
       size: result.bytes
     };
-
-    //save the video info to the data base
-    const videoItem = new Video({
-      title: req.file.originalname,
-      category,
-      description: 'Uploaded via video',
-      videoUrl: uploadedVideo.url,
-      videoPublicId: uploadedVideo.publicId,
-      duration: uploadedVideo.duration,
-      thumbnail: {url: thumbnail?.url || '', publicId: thumbnail?.publicId || ''},
-      createdBy: req.user._id
-    });
-    await videoItem.save();
     
     res.json({
       success: true,

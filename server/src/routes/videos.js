@@ -73,13 +73,13 @@ router.get('/:id', auth, async (req, res) => {
 // @route   POST /api/videos
 // @desc    Create video
 // @access  Private
-router.post('/', auth, videoValidation, async (req, res) => {
+router.post('/', auth, async (req, res) => {
   try {
     const videoData = {
       ...req.body,
-      createdBy: req.user._id
+      createdBy: req.user._id,
+      updatedBy: req.user._id
     };
-
     const video = new Video(videoData);
     await video.save();
 
@@ -98,7 +98,7 @@ router.post('/', auth, videoValidation, async (req, res) => {
 // @route   PUT /api/videos/:id
 // @desc    Update video
 // @access  Private
-router.put('/:id', auth, videoValidation, async (req, res) => {
+router.put('/:id', auth, async (req, res) => {
   try {
     const video = await Video.findById(req.params.id);
 
