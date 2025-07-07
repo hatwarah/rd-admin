@@ -6,7 +6,11 @@ import {
   Video, 
   FileText, 
   Settings,
-  Building2
+  Building2,
+  MessageSquare,
+  Newspaper,
+  Users,
+  MapPin
 } from 'lucide-react'
 import { cn } from '../../utils/cn'
 
@@ -15,6 +19,10 @@ const navigation = [
   { name: 'Gallery', href: '/gallery', icon: Image },
   { name: 'Videos', href: '/videos', icon: Video },
   { name: 'Blogs', href: '/blogs', icon: FileText },
+  { name: 'Testimonials', href: '/testimonials', icon: MessageSquare },
+  { name: 'Publications', href: '/publications', icon: Newspaper },
+  { name: 'Clients', href: '/clients', icon: Users },
+  { name: 'Locations', href: '/locations', icon: MapPin },
 ]
 
 const Sidebar: React.FC = () => {

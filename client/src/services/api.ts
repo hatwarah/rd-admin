@@ -74,6 +74,45 @@ export const blogsAPI = {
   toggleFeatured: (id: string) => api.patch(`/blogs/${id}/toggle-featured`),
 }
 
+// Testimonials API
+export const testimonialsAPI = {
+  getAll: (params?: any) => api.get('/testimonials', { params }),
+  getById: (id: string) => api.get(`/testimonials/${id}`),
+  create: (data: any) => api.post('/testimonials', data),
+  update: (id: string, data: any) => api.put(`/testimonials/${id}`, data),
+  delete: (id: string) => api.delete(`/testimonials/${id}`),
+  toggleFeatured: (id: string) => api.patch(`/testimonials/${id}/toggle-featured`),
+}
+
+// Publications API
+export const publicationsAPI = {
+  getAll: (params?: any) => api.get('/publications', { params }),
+  getById: (id: string) => api.get(`/publications/${id}`),
+  create: (data: any) => api.post('/publications', data),
+  update: (id: string, data: any) => api.put(`/publications/${id}`, data),
+  delete: (id: string) => api.delete(`/publications/${id}`),
+  toggleFeatured: (id: string) => api.patch(`/publications/${id}/toggle-featured`),
+}
+
+// Clients API
+export const clientsAPI = {
+  getAll: (params?: any) => api.get('/clients', { params }),
+  getById: (id: string) => api.get(`/clients/${id}`),
+  create: (data: any) => api.post('/clients', data),
+  update: (id: string, data: any) => api.put(`/clients/${id}`, data),
+  delete: (id: string) => api.delete(`/clients/${id}`),
+  toggleFeatured: (id: string) => api.patch(`/clients/${id}/toggle-featured`),
+}
+
+// Locations API
+export const locationsAPI = {
+  getAll: (params?: any) => api.get('/locations', { params }),
+  getById: (id: string) => api.get(`/locations/${id}`),
+  create: (data: any) => api.post('/locations', data),
+  update: (id: string, data: any) => api.put(`/locations/${id}`, data),
+  delete: (id: string) => api.delete(`/locations/${id}`),
+}
+
 // Upload API
 export const uploadAPI = {
   uploadImages: (formData: FormData) =>
@@ -94,6 +133,22 @@ export const uploadAPI = {
     }),
   uploadAuthorImage: (formData: FormData) =>
     api.post('/upload/author-image', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+  uploadTestimonialAvatar: (formData: FormData) =>
+    api.post('/upload/testimonial-avatar', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+  uploadPublicationImage: (formData: FormData) =>
+    api.post('/upload/publication-image', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+  uploadClientLogo: (formData: FormData) =>
+    api.post('/upload/client-logo', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }),
+  uploadLocationImage: (formData: FormData) =>
+    api.post('/upload/location-image', formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     }),
 }

@@ -13,6 +13,10 @@ const galleryRoutes = require('./routes/gallery');
 const videoRoutes = require('./routes/videos');
 const blogRoutes = require('./routes/blogs');
 const uploadRoutes = require('./routes/upload');
+const testimonialRoutes = require('./routes/testimonials');
+const publicationRoutes = require('./routes/publications');
+const clientRoutes = require('./routes/clients');
+const locationRoutes = require('./routes/locations');
 
 // Import middleware
 const errorHandler = require('./middleware/errorHandler');
@@ -64,6 +68,10 @@ app.use('/api/gallery', galleryRoutes);
 app.use('/api/videos', videoRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/upload', uploadRoutes);
+app.use('/api/testimonials', testimonialRoutes);
+app.use('/api/publications', publicationRoutes);
+app.use('/api/clients', clientRoutes);
+app.use('/api/locations', locationRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

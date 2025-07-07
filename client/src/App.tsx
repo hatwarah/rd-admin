@@ -8,6 +8,10 @@ import DashboardPage from './pages/Dashboard/DashboardPage'
 import GalleryPage from './pages/Gallery/GalleryPage'
 import VideosPage from './pages/Videos/VideosPage'
 import BlogsPage from './pages/Blogs/BlogsPage'
+import TestimonialsPage from './pages/Testimonials/TestimonialsPage'
+import PublicationsPage from './pages/Publications/PublicationsPage'
+import ClientsPage from './pages/Clients/ClientsPage'
+import LocationsPage from './pages/Locations/LocationsPage'
 import LoadingSpinner from './components/UI/LoadingSpinner'
 
 function App() {
@@ -37,6 +41,10 @@ function App() {
         <Route path="gallery" element={<GalleryPage />} />
         <Route path="videos" element={<VideosPage />} />
         <Route path="blogs" element={<BlogsPage />} />
+        <Route path="testimonials" element={<TestimonialsPage />} />
+        <Route path="publications" element={<PublicationsPage />} />
+        <Route path="clients" element={<ClientsPage />} />
+        <Route path="locations" element={<LocationsPage />} />
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>

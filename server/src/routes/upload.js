@@ -251,4 +251,140 @@ router.post('/author-image', auth, upload.single('authorImage'), async (req, res
   }
 });
 
+// @route   POST /api/upload/testimonial-avatar
+// @desc    Upload testimonial avatar
+// @access  Private
+router.post('/testimonial-avatar', auth, upload.single('avatar'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No avatar file uploaded' });
+    }
+
+    const result = await uploadToCloudinary(req.file.buffer, {
+      type: 'testimonials',
+      title: req.file.originalname,
+      resourceType: 'image'
+    });
+
+    const uploadedImage = {
+      url: result.secure_url,
+      publicId: result.public_id,
+      width: result.width,
+      height: result.height,
+      format: result.format,
+      size: result.bytes
+    };
+
+    res.json({
+      success: true,
+      data: uploadedImage
+    });
+  } catch (error) {
+    console.error('Avatar upload error:', error);
+    res.status(500).json({ message: error.message || 'Failed to upload avatar' });
+  }
+});
+
+// @route   POST /api/upload/publication-image
+// @desc    Upload publication image
+// @access  Private
+router.post('/publication-image', auth, upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No image file uploaded' });
+    }
+
+    const result = await uploadToCloudinary(req.file.buffer, {
+      type: 'publications',
+      title: req.file.originalname,
+      resourceType: 'image'
+    });
+
+    const uploadedImage = {
+      url: result.secure_url,
+      publicId: result.public_id,
+      width: result.width,
+      height: result.height,
+      format: result.format,
+      size: result.bytes
+    };
+
+    res.json({
+      success: true,
+      data: uploadedImage
+    });
+  } catch (error) {
+    console.error('Publication image upload error:', error);
+    res.status(500).json({ message: error.message || 'Failed to upload publication image' });
+  }
+});
+
+// @route   POST /api/upload/client-logo
+// @desc    Upload client logo
+// @access  Private
+router.post('/client-logo', auth, upload.single('logo'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No logo file uploaded' });
+    }
+
+    const result = await uploadToCloudinary(req.file.buffer, {
+      type: 'clients',
+      title: req.file.originalname,
+      resourceType: 'image'
+    });
+
+    const uploadedImage = {
+      url: result.secure_url,
+      publicId: result.public_id,
+      width: result.width,
+      height: result.height,
+      format: result.format,
+      size: result.bytes
+    };
+
+    res.json({
+      success: true,
+      data: uploadedImage
+    });
+  } catch (error) {
+    console.error('Client logo upload error:', error);
+    res.status(500).json({ message: error.message || 'Failed to upload client logo' });
+  }
+});
+
+// @route   POST /api/upload/location-image
+// @desc    Upload location iconic image
+// @access  Private
+router.post('/location-image', auth, upload.single('iconicImage'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No image file uploaded' });
+    }
+
+    const result = await uploadToCloudinary(req.file.buffer, {
+      type: 'locations',
+      title: req.file.originalname,
+      resourceType: 'image'
+    });
+
+    const uploadedImage = {
+      url: result.secure_url,
+      publicId: result.public_id,
+      width: result.width,
+      height: result.height,
+      format: result.format,
+      size: result.bytes
+    };
+
+    res.json({
+      success: true,
+      data: uploadedImage
+    });
+  } catch (error) {
+    console.error('Location image upload error:', error);
+    res.status(500).json({ message: error.message || 'Failed to upload location image' });
+  }
+});
+
 module.exports = router;
