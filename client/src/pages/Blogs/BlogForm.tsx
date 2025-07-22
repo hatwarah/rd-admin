@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useMutation } from 'react-query'
-import { X } from 'lucide-react'
+import { X, ExternalLink } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { blogsAPI, uploadAPI } from '../../services/api'
 import Button from '../../components/UI/Button'
@@ -191,7 +191,7 @@ const BlogForm: React.FC<BlogFormProps> = ({ item, onSuccess }) => {
 
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Content *
+          Content * <a href="https://text-html.com/" target="_blank" title="Open Content Editor" className="hover:text-red-500"><ExternalLink className="inline w-4 h-4 ml-1" /></a>
         </label>
         <textarea
           name="content"
