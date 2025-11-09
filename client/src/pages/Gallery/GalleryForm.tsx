@@ -18,7 +18,8 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSuccess }) => {
     description: '',
     tags: [] as string[],
     featured: false,
-    status: 'published'
+    status: 'published',
+    order: 0,
   })
   const [images, setImages] = useState<any[]>([])
   const [uploadedImages, setUploadedImages] = useState<any[]>([])
@@ -32,7 +33,8 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSuccess }) => {
         description: item.description || '',
         tags: item.tags || [],
         featured: item.featured || false,
-        status: item.status || 'published'
+        status: item.status || 'published',
+        order: item.order || 0,
       })
       setUploadedImages(item.images || [])
     }
@@ -209,8 +211,19 @@ const GalleryForm: React.FC<GalleryFormProps> = ({ item, onSuccess }) => {
           <span className="ml-2 text-sm text-gray-700">Featured</span>
         </label>
 
+        <label className="flex items-center">
+        <span className="ml-2 text-sm text-gray-700">Order</span>
+          <input
+            type="number"
+            name="order"
+            value={formData.order}
+            onChange={handleChange}
+            className="w-20 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+          />
+        </label>
+
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="text-sm font-medium text-gray-700 mb-2 mr-2">
             Status
           </label>
           <select

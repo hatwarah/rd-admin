@@ -13,6 +13,10 @@ const videoSchema = new mongoose.Schema({
     enum: ['Residential', 'Commercial', 'Mixed-Use', 'Institutional', 'Walkthrough', 'Animation'],
     trim: true
   },
+  order: {
+    type: Number,
+    default: 0
+  },
   description: {
     type: String,
     required: [true, 'Description is required'],

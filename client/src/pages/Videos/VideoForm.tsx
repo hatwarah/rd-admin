@@ -21,7 +21,8 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
     client: '',
     featured: false,
     status: 'published',
-    resolution: '1080p'
+    resolution: '1080p',
+    order: 0
   })
   const [thumbnail, setThumbnail] = useState<any>(null)
   const [video, setVideo] = useState<any>(null)
@@ -39,7 +40,8 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
         client: item.client || '',
         featured: item.featured || false,
         status: item.status || 'published',
-        resolution: item.resolution || '1080p'
+        resolution: item.resolution || '1080p',
+        order: item.order || 0
       })
       setThumbnail(item.thumbnail)
       setVideo({
@@ -216,6 +218,19 @@ const VideoForm: React.FC<VideoFormProps> = ({ item, onSuccess }) => {
             value={formData.duration}
             onChange={handleChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
+            placeholder="e.g., 3:45"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Order
+          </label>
+          <input
+            type="number"
+            name="order"
+            value={formData.order}
+            onChange={handleChange}
+            className="w-20 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
             placeholder="e.g., 3:45"
           />
         </div>
