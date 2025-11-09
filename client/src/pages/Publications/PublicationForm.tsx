@@ -121,12 +121,11 @@ const PublicationForm: React.FC<PublicationFormProps> = ({ item, onSuccess }) =>
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-2">
-          Title *
+          Title
         </label>
         <input
           type="text"
           name="title"
-          required
           value={formData.title}
           onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500"
